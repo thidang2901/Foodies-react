@@ -17,7 +17,9 @@ import {
 import { categoriesData } from "../utils/data"
 import { Loader } from "../components"
 import { storage } from "../configs/firebase.config"
-import { saveItem } from "../utils/firebaseFunctions"
+import { getAllFoodItems, saveItem } from "../utils/firebaseFunctions"
+import { useStateValue } from "../context/StateProvider"
+import { actionType } from "../context/reducer"
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("")
@@ -25,10 +27,22 @@ const CreateContainer = () => {
   const [price, setPrice] = useState("")
   const [category, setCategory] = useState("")
   const [imageAsset, setImageAsset] = useState(null)
+
   const [fields, setFields] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [alertStatus, setAlertStatus] = useState("danger")
   const [msg, setMsg] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+
+  const [{ foodItems }, dispatch] = useStateValue()
+
+  const fetchData = async () => {
+    await getAllFoodItems().then((data) => {
+      dispatch({
+        type: actionType.SET_FOOD_ITEMS,
+        foodItems: data,
+      })
+    })
+  }
 
   const uploadImage = (e) => {
     setIsLoading(true)
@@ -87,6 +101,8 @@ const CreateContainer = () => {
     } catch (error) {
       handleError({ msg: "Error while saving item, try again ☹️", error })
     }
+
+    fetchData()
   }
 
   const handleSuccess = ({ imageURL = null, msg = null }) => {

@@ -5,8 +5,27 @@ import { Header } from "./components"
 import { MainContainer, CreateContainer } from "./containers"
 
 import "./App.css"
+import { useStateValue } from "./context/StateProvider"
+import { getAllFoodItems } from "./utils/firebaseFunctions"
+import { useEffect } from "react"
+import { actionType } from "./context/reducer"
 
 function App() {
+  const [{ foodItems }, dispatch] = useStateValue()
+
+  const fetchData = async () => {
+    await getAllFoodItems().then((data) => {
+      dispatch({
+        type: actionType.SET_FOOD_ITEMS,
+        foodItems: data,
+      })
+    })
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
     <AnimatePresence mode="wait">
       <div className="w-screen h-auto flex flex-col bg-primary">
