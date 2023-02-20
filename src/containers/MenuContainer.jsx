@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react"
 
-import { CategoryCard, Heading } from "../components"
+import { CategoryCard, Heading, ItemListRow } from "../components"
+import { useStateValue } from "../context/StateProvider"
 import { categoriesData } from "../utils/data"
 
 const MenuContainer = () => {
-  const [filter, setFilter] = useState("chicken")
+  const [{ foodItems }, dispatch] = useStateValue()
+  const [categoryFilter, setCategoryFilter] = useState("chicken")
 
   useEffect(() => {
-    console.log(filter)
-  }, [filter])
+    console.log(categoryFilter)
+  }, [categoryFilter])
 
   return (
     <section id="menu" className="w-full my-6">
@@ -21,10 +23,18 @@ const MenuContainer = () => {
               <CategoryCard
                 key={category.id}
                 data={category}
-                isActive={filter === category.urlParamName}
-                onClick={() => setFilter(category.urlParamName)}
+                isActive={categoryFilter === category.urlParamName}
+                onClick={() => setCategoryFilter(category.urlParamName)}
               />
             ))}
+        </div>
+
+        <div className="w-full">
+          <ItemListRow
+            className="flex items-center justify-center"
+            flag={false}
+            data={foodItems?.filter((item) => item.category === categoryFilter)}
+          />
         </div>
       </div>
     </section>
