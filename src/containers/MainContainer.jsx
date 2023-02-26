@@ -1,10 +1,7 @@
 import React from "react"
 
-import { useStateValue } from "../context/StateProvider"
-import CartContainer from "./CartContainer"
-import HomeContainer from "./HomeContainer"
-import HomeContentContainer from "./HomeContentContainer"
-import MenuContainer from "./MenuContainer"
+import { CartContainer, HomeContainer, HomeContentContainer, MenuContainer } from "@containers"
+import { useStateValue } from "@context"
 
 const MainContainer = () => {
   const [{ cartShow }] = useStateValue()

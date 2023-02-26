@@ -6,8 +6,7 @@ import { Link } from "react-router-dom"
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { app } from "../configs/firebase.config"
 
-import { actionType } from "../context/reducer"
-import { useStateValue } from "../context/StateProvider"
+import { actionType, useStateValue } from "@context"
 
 import Avatar from "@assets/images/avatar.png"
 import Logo from "@assets/images/logo.png"

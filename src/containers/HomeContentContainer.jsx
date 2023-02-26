@@ -2,8 +2,8 @@ import { motion } from "framer-motion"
 import React, { createRef, useState } from "react"
 import { MdChevronLeft, MdChevronRight } from "react-icons/md"
 
-import { Heading, ItemListRow } from "../components"
-import { useStateValue } from "../context/StateProvider"
+import { Heading, ItemListRow } from "@components"
+import { useStateValue } from "@context"
 
 const HomeContentContainer = () => {
   const ref = createRef()

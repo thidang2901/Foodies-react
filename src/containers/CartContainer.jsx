@@ -3,10 +3,9 @@ import React, { useMemo, useState } from "react"
 import { MdOutlineKeyboardBackspace } from "react-icons/md"
 import { RiRefreshFill } from "react-icons/ri"
 
-import EmptyCart from "../assets/images/emptyCart.svg"
-import CartItem from "../components/CartItem"
-import { actionType } from "../context/reducer"
-import { useStateValue } from "../context/StateProvider"
+import EmptyCart from "@assets/images/emptyCart.svg"
+import CartItem from "@components/CartItem"
+import { actionType, useStateValue } from "@context"
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, cartTotal }, dispatch] = useStateValue()

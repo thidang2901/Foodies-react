@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
 import React from "react"
 import { MdShoppingBasket } from "react-icons/md"
-import { actionType } from "../context/reducer"
-import { useStateValue } from "../context/StateProvider"
+
+import { actionType, useStateValue } from "@context"
 import ItemQuantityControl from "./ItemQuantityControl"
 
 const ItemCard = ({ item }) => {

@@ -1,14 +1,13 @@
-import { Route, Routes } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
+import { useEffect } from "react"
+import { Route, Routes } from "react-router-dom"
 
-import { Header } from "./components"
-import { MainContainer, CreateContainer } from "./containers"
+import { Header } from "@components"
+import { CreateContainer, MainContainer } from "@containers"
+import { actionType, useStateValue } from "@context"
+import { getAllFoodItems } from "@utils/firebaseFunctions"
 
 import "./App.css"
-import { useStateValue } from "./context/StateProvider"
-import { getAllFoodItems } from "./utils/firebaseFunctions"
-import { useEffect } from "react"
-import { actionType } from "./context/reducer"
 
 function App() {
   const [{ foodItems }, dispatch] = useStateValue()

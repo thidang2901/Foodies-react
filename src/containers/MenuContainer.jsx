@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
-import { CategoryCard, Heading, ItemListRow } from "../components"
-import { useStateValue } from "../context/StateProvider"
-import { categoriesData } from "../utils/data"
+import { CategoryCard, Heading, ItemListRow } from "@components"
+import { useStateValue } from "@context"
+import { categoriesData } from "@utils/data"
 
 const MenuContainer = () => {
   const [{ foodItems }, dispatch] = useStateValue()

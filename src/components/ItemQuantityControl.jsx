@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
 import React, { useCallback } from "react"
+
+import { actionType, useStateValue } from "@context"
 import { BiMinus, BiPlus } from "react-icons/bi"
-import { actionType } from "../context/reducer"
-import { useStateValue } from "../context/StateProvider"
 
 const ItemQuantityControl = ({ item, bgColor = "white" }) => {
   const [{ cartItems }, dispatch] = useStateValue()

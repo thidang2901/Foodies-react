@@ -1,25 +1,13 @@
-import React, { useState } from "react"
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { motion } from "framer-motion"
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage"
-import {
-  MdFastfood,
-  MdCloudUpload,
-  MdDelete,
-  MdFoodBank,
-  MdAttachMoney,
-} from "react-icons/md"
+import React, { useState } from "react"
+import { MdAttachMoney, MdCloudUpload, MdDelete, MdFastfood, MdFoodBank } from "react-icons/md"
 
-import { categoriesData } from "../utils/data"
-import { Loader } from "../components"
+import { Loader } from "@components"
+import { actionType, useStateValue } from "@context"
+import { categoriesData } from "@utils/data"
+import { getAllFoodItems, saveItem } from "@utils/firebaseFunctions"
 import { storage } from "../configs/firebase.config"
-import { getAllFoodItems, saveItem } from "../utils/firebaseFunctions"
-import { useStateValue } from "../context/StateProvider"
-import { actionType } from "../context/reducer"
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("")
@@ -53,8 +41,7 @@ const CreateContainer = () => {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const uploadProgress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       },
       (error) => {
         handleError({ msg: "Error while uploading, try again ☹️", error })
@@ -147,9 +134,7 @@ const CreateContainer = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
-              alertStatus === "danger"
-                ? "bg-red-400 text-red-800"
-                : "bg-emerald-400 text-emerald-800"
+              alertStatus === "danger" ? "bg-red-400 text-red-800" : "bg-emerald-400 text-emerald-800"
             }`}
           >
             {msg}
@@ -200,27 +185,15 @@ const CreateContainer = () => {
                   <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer">
                     <div className="w-full h-full flex flex-col items-center justify-center gap-2">
                       <MdCloudUpload className="text-gray-500 text-3xl hover:text-gray-700" />
-                      <p className="text-gray-500 hover:text-gray-700">
-                        Click here to upload
-                      </p>
+                      <p className="text-gray-500 hover:text-gray-700">Click here to upload</p>
                     </div>
-                    <input
-                      type="file"
-                      name="uploadImage"
-                      accept="image/*"
-                      onChange={uploadImage}
-                      className="w-0 h-0"
-                    />
+                    <input type="file" name="uploadImage" accept="image/*" onChange={uploadImage} className="w-0 h-0" />
                   </label>
                 </>
               ) : (
                 <>
                   <div className="relative h-full">
-                    <img
-                      src={imageAsset}
-                      alt="uploaded-img"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={imageAsset} alt="uploaded-img" className="w-full h-full object-cover" />
                     <button
                       type="button"
                       className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
