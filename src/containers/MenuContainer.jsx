@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 
 import { CategoryCard, Heading, ItemListRow } from "../components"
 import { useStateValue } from "../context/StateProvider"
@@ -7,10 +7,6 @@ import { categoriesData } from "../utils/data"
 const MenuContainer = () => {
   const [{ foodItems }, dispatch] = useStateValue()
   const [categoryFilter, setCategoryFilter] = useState("chicken")
-
-  useEffect(() => {
-    console.log(categoryFilter)
-  }, [categoryFilter])
 
   return (
     <section id="menu" className="w-full my-6">

@@ -1,3 +1,5 @@
+import { LOCAL_STORAGE_CONST } from "../utils/constants"
+
 export const actionType = {
   SET_USER: "SET_USER",
   SET_FOOD_ITEMS: "SET_FOOD_ITEMS",
@@ -9,6 +11,7 @@ export const actionType = {
 const reducer = (state, action) => {
   switch (action.type) {
     case actionType.SET_USER:
+      localStorage.setItem(LOCAL_STORAGE_CONST.USER, JSON.stringify(action.user))
       return {
         ...state,
         user: action.user,
@@ -29,8 +32,8 @@ const reducer = (state, action) => {
         return prevTotal + currentItem.price * currentItem.cartQty
       }, 0)
 
-      localStorage.setItem("cartItems", JSON.stringify(action.cartItems))
-      localStorage.setItem("cartTotal", total)
+      localStorage.setItem(LOCAL_STORAGE_CONST.CART_ITEMS, JSON.stringify(action.cartItems))
+      localStorage.setItem(LOCAL_STORAGE_CONST.CART_TOTAL, total)
       return {
         ...state,
         cartItems: action.cartItems,
@@ -38,8 +41,8 @@ const reducer = (state, action) => {
       }
     }
     case actionType.REMOVE_CART: {
-      localStorage.removeItem("cartItems")
-      localStorage.removeItem("cartTotal")
+      localStorage.removeItem(LOCAL_STORAGE_CONST.CART_ITEMS)
+      localStorage.removeItem(LOCAL_STORAGE_CONST.CART_TOTAL)
       return {
         ...state,
         cartItems: {},

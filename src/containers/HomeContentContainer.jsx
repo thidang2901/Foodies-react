@@ -1,9 +1,9 @@
-import React, { useState, createRef } from "react"
 import { motion } from "framer-motion"
+import React, { createRef, useState } from "react"
 import { MdChevronLeft, MdChevronRight } from "react-icons/md"
 
-import { useStateValue } from "../context/StateProvider"
 import { Heading, ItemListRow } from "../components"
+import { useStateValue } from "../context/StateProvider"
 
 const HomeContentContainer = () => {
   const ref = createRef()
@@ -19,10 +19,7 @@ const HomeContentContainer = () => {
     ref.current.scrollLeft += offset
     setScrollX(scrollX + offset) // update current position X
 
-    if (
-      Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <=
-      ref.current.offsetWidth
-    ) {
+    if (Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <= ref.current.offsetWidth) {
       setEndScroll(true)
     } else {
       setEndScroll(false)

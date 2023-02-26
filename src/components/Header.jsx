@@ -13,11 +13,7 @@ import Avatar from "@assets/images/avatar.png"
 import Logo from "@assets/images/logo.png"
 
 const Header = () => {
-  const firebaseAuth = getAuth(app)
-  const provider = new GoogleAuthProvider()
-
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue()
-
   const [isMenu, setIsMenu] = useState(false)
 
   // TODO: add admin privilege feature
@@ -30,6 +26,8 @@ const Header = () => {
     return prevNum
   }, 0)
 
+  const firebaseAuth = getAuth(app)
+  const provider = new GoogleAuthProvider()
   const login = async () => {
     if (!user) {
       const {
@@ -40,8 +38,6 @@ const Header = () => {
         type: actionType.SET_USER,
         user: providerData[0],
       })
-
-      localStorage.setItem("user", JSON.stringify(providerData[0]))
     } else {
       setIsMenu(!isMenu)
     }
@@ -68,11 +64,7 @@ const Header = () => {
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary select-none">
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
-        <Link
-          to={"/"}
-          className="flex items-center gap-2"
-          onClick={() => setIsMenu(false)}
-        >
+        <Link to={"/"} className="flex items-center gap-2" onClick={() => setIsMenu(false)}>
           <img src={Logo} className="w-10 object-cover" alt="logo" />
           <p className="text-headingColor text-xl font-bold">City</p>
         </Link>

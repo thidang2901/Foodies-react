@@ -1,23 +1,20 @@
+import { LOCAL_STORAGE_CONST } from "./constants"
+
+const getFromLocalStorage = (key) => {
+  return localStorage.getItem(key) !== "undefined" ? JSON.parse(localStorage.getItem(key)) : localStorage.clear()
+}
+
 export const fetchUser = () => {
-  const user =
-    localStorage.getItem("user") !== "undefined"
-      ? JSON.parse(localStorage.getItem("user"))
-      : localStorage.clear()
+  const user = getFromLocalStorage(LOCAL_STORAGE_CONST.USER)
   return user
 }
 
 export const fetchCart = () => {
-  const cartItems =
-    localStorage.getItem("cartItems") !== "undefined"
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : localStorage.clear()
+  const cartItems = getFromLocalStorage(LOCAL_STORAGE_CONST.CART_ITEMS)
   return cartItems ? cartItems : {}
 }
 
 export const fetchCartTotal = () => {
-  const cartTotal =
-    localStorage.getItem("cartTotal") !== "undefined"
-      ? JSON.parse(localStorage.getItem("cartTotal"))
-      : localStorage.clear()
+  const cartTotal = getFromLocalStorage(LOCAL_STORAGE_CONST.CART_TOTAL)
   return cartTotal ? parseFloat(cartTotal.toFixed(2)) : 0
 }
