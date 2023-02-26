@@ -55,7 +55,7 @@ const HomeContentContainer = () => {
         </div>
       </div>
 
-      <ItemListRow ref={ref} flag={true} data={fruitsData} />
+      <ItemListRow ref={ref} scrollable={true} items={fruitsData} />
     </section>
   )
 }

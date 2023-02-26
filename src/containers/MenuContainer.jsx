@@ -32,8 +32,8 @@ const MenuContainer = () => {
         <div className="w-full">
           <ItemListRow
             className="flex items-center justify-center"
-            flag={false}
-            data={foodItems?.filter((item) => item.category === categoryFilter)}
+            scrollable={false}
+            items={foodItems?.filter((item) => item.category === categoryFilter)}
           />
         </div>
       </div>

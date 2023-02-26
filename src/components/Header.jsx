@@ -1,27 +1,34 @@
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
-import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md"
 import { motion } from "framer-motion"
+import React, { useState } from "react"
+import { MdAdd, MdLogout, MdShoppingBasket } from "react-icons/md"
+import { Link } from "react-router-dom"
 
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { app } from "../configs/firebase.config"
 
-import { useStateValue } from "../context/StateProvider"
 import { actionType } from "../context/reducer"
+import { useStateValue } from "../context/StateProvider"
 
-import Logo from "../assets/images/logo.png"
-import Avatar from "../assets/images/avatar.png"
+import Avatar from "@assets/images/avatar.png"
+import Logo from "@assets/images/logo.png"
 
 const Header = () => {
   const firebaseAuth = getAuth(app)
   const provider = new GoogleAuthProvider()
 
-  const [{ user }, dispatch] = useStateValue()
+  const [{ user, cartShow, cartItems }, dispatch] = useStateValue()
 
   const [isMenu, setIsMenu] = useState(false)
 
   // TODO: add admin privilege feature
   const isAdmin = user && user.email === "admin@gmail.com"
+
+  const numCartItems = Object.keys(cartItems).reduce((prevNum, currentId) => {
+    if (cartItems[currentId]?.cartQty) {
+      return prevNum + cartItems[currentId].cartQty
+    }
+    return prevNum
+  }, 0)
 
   const login = async () => {
     if (!user) {
@@ -50,8 +57,15 @@ const Header = () => {
     })
   }
 
+  const showCart = () => {
+    dispatch({
+      type: actionType.SET_SHOW_CART,
+      cartShow: !cartShow,
+    })
+  }
+
   return (
-    <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary">
+    <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary select-none">
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <Link
@@ -98,12 +112,17 @@ const Header = () => {
 
           <div
             className="relative flex items-center justify-center"
-            onClick={() => setIsMenu(false)}
+            onClick={() => {
+              setIsMenu(false)
+              showCart()
+            }}
           >
             <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
-            <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
-              <p className="text-xs text-white font-semibold">2</p>
-            </div>
+            {numCartItems > 0 && (
+              <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
+                <p className="text-xs text-white font-semibold">{numCartItems}</p>
+              </div>
+            )}
           </div>
 
           <div className="relative">
@@ -145,11 +164,13 @@ const Header = () => {
 
       {/* mobile */}
       <div className="flex items-center justify-between md:hidden w-full h-full">
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center" onClick={showCart}>
           <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
-          <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
-            <p className="text-xs text-white font-semibold">2</p>
-          </div>
+          {numCartItems > 0 && (
+            <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
+              <p className="text-xs text-white font-semibold">{numCartItems}</p>
+            </div>
+          )}
         </div>
 
         <Link to={"/"} className="flex items-center gap-2">
