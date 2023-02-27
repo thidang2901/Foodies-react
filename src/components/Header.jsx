@@ -9,7 +9,7 @@ import { app } from "../configs/firebase.config"
 import { actionType, useStateValue } from "@context"
 
 import Avatar from "@assets/images/avatar.png"
-import Logo from "@assets/images/logo.png"
+import Logo from "@assets/logo/logo-no-background.svg"
 
 const Header = () => {
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue()
@@ -64,8 +64,7 @@ const Header = () => {
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <Link to={"/"} className="flex items-center gap-2" onClick={() => setIsMenu(false)}>
-          <img src={Logo} className="w-10 object-cover" alt="logo" />
-          <p className="text-headingColor text-xl font-bold">City</p>
+          <img src={Logo} className="w-40 object-cover" alt="logo" />
         </Link>
 
         <div className="flex items-center gap-8">
@@ -165,8 +164,7 @@ const Header = () => {
         </div>
 
         <Link to={"/"} className="flex items-center gap-2">
-          <img src={Logo} className="w-10 object-cover" alt="logo" />
-          <p className="text-headingColor text-xl font-bold">City</p>
+          <img src={Logo} className="h-8 object-cover" alt="logo" />
         </Link>
 
         <div className="relative">

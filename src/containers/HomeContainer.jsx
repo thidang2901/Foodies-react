@@ -15,14 +15,16 @@ const HomeContainer = () => {
           </div>
         </div>
 
-        <p className="text-[2.5rem] md:text-[4.5rem] font-bold tracking-wide text-headingColor">
-          The Fastest Delivery in <span className="text-orange-600 text-[3rem] md:text-[5rem]">Your City</span>
+        <p className="md:max-w-2xl text-[1.5rem] md:text-[3.5rem] font-bold tracking-wide text-headingColor">
+          <span className="text-orange-600 text-[2rem] md:text-[4rem]">Foodies</span>
+          <br />
+          Deliver happiness to your door
         </p>
 
         <p className="text-base text-textColor text-center md:text-left md:w-[80%]">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam, maiores ratione earum quibusdam
-          dignissimos quas hic architecto quod aperiam molestias, pariatur rerum culpa dolorum itaque laborum et
-          repellat cumque.
+          Craving something tasty? Our all-in-one service that has everything you need to satisfy your hunger and
+          thirst. Browse our selection of mouth-watering fast food, hearty rice dishes, juicy fruits, and cold soft
+          drinks and have your meal delivered to your doorstep.
         </p>
 
         <button
