@@ -1,5 +1,9 @@
 # Foodies - Deliver happiness to your door
 
+![build](https://github.com/thidang2901/foodies-app/actions/workflows/deploy.yml/badge.svg?branch=master)
+![last commit](https://badgen.net/github/last-commit/thidang2901/foodies-app)
+
+
 <img src="./src/assets/logo/logo-no-background.svg" width="300" title="Foodies - Deliver happiness to your door">
 
 Welcome to one of my portfolio projects! Here you'll find examples of my work in web development.
