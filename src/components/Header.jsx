@@ -63,7 +63,7 @@ const Header = () => {
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary select-none">
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
-        <Link to={"/foodies-app/"} className="flex items-center gap-2" onClick={() => setIsMenu(false)}>
+        <Link to={"/"} className="flex items-center gap-2" onClick={() => setIsMenu(false)}>
           <img src={Logo} className="w-40 object-cover" alt="logo" />
         </Link>
 
@@ -121,6 +121,9 @@ const Header = () => {
               src={user ? user.photoURL : Avatar}
               className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
               alt="user-profile"
+              onClick={() => {
+                return user ? setIsMenu(!isMenu) : login()
+              }}
             />
             {isMenu && (
               <motion.div
@@ -163,7 +166,7 @@ const Header = () => {
           )}
         </div>
 
-        <Link to={"/foodies-app/"} className="flex items-center gap-2">
+        <Link to={"/"} className="flex items-center gap-2">
           <img src={Logo} className="h-8 object-cover" alt="logo" />
         </Link>
 
@@ -173,7 +176,9 @@ const Header = () => {
             src={user ? user.photoURL : Avatar}
             className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
             alt="user-profile"
-            onClick={login}
+            onClick={() => {
+              return user ? setIsMenu(!isMenu) : login()
+            }}
           />
           {isMenu && (
             <motion.div

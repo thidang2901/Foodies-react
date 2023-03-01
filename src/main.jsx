@@ -10,7 +10,7 @@ import "./index.css"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/foodies-app">
       <StateProvider initialState={initialState} reducer={reducer}>
         <App />
       </StateProvider>
