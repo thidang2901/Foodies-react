@@ -1,8 +1,4 @@
-import {
-  fetchCart,
-  fetchCartTotal,
-  fetchUser,
-} from "../utils/fetchLocalStorageData"
+import { fetchCart, fetchCartTotal, fetchUser } from "../utils/fetchLocalStorageData"
 
 const userInfo = fetchUser()
 const cartInfo = fetchCart()

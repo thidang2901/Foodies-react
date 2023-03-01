@@ -55,4 +55,3 @@ yarn dev
 - Web Materials & Inspired by [Full Stack Food Delivery App - React Redux Reducer, Firebase](https://www.youtube.com/watch?v=kmU7uX3ZHJc&ab_channel=VetrivelRavi)
 
 - Logo by [LOGO.com](https://logo.com/)
-

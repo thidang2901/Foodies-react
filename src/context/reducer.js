@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE_CONST } from "../utils/constants"
 
-export const actionType = {
+const actionType = {
   SET_USER: "SET_USER",
   SET_FOOD_ITEMS: "SET_FOOD_ITEMS",
   SET_SHOW_CART: "SET_SHOW_CART",
@@ -54,4 +54,4 @@ const reducer = (state, action) => {
   return state
 }
 
-export default reducer
+export { reducer, actionType }
