@@ -3,20 +3,19 @@ import React, { useState } from "react"
 import { MdAdd, MdLogout, MdShoppingBasket } from "react-icons/md"
 import { Link } from "react-router-dom"
 
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { app } from "../configs/firebase.config"
-
 import { actionType, useStateValue } from "@context"
 
 import Avatar from "@assets/images/avatar.png"
 import Logo from "@assets/logo/logo-no-background.svg"
+import LoginModal from "./LoginModal"
 
 const Header = () => {
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue()
   const [isMenu, setIsMenu] = useState(false)
+  const [modalShown, toggleModal] = useState(false)
 
   // TODO: add admin privilege feature
-  const isAdmin = user && user.email === "admin@gmail.com"
+  const isAdmin = user && user.email === "dkthi2901@gmail.com"
 
   const numCartItems = Object.keys(cartItems).reduce((prevNum, currentId) => {
     if (cartItems[currentId]?.cartQty) {
@@ -24,23 +23,6 @@ const Header = () => {
     }
     return prevNum
   }, 0)
-
-  const firebaseAuth = getAuth(app)
-  const provider = new GoogleAuthProvider()
-  const login = async () => {
-    if (!user) {
-      const {
-        user: { refreshToken, providerData },
-      } = await signInWithPopup(firebaseAuth, provider)
-
-      dispatch({
-        type: actionType.SET_USER,
-        user: providerData[0],
-      })
-    } else {
-      setIsMenu(!isMenu)
-    }
-  }
 
   const logout = () => {
     setIsMenu(false)
@@ -78,25 +60,25 @@ const Header = () => {
               className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
               onClick={() => setIsMenu(false)}
             >
-              Home
+              <Link to="/">Home</Link>
             </li>
             <li
               className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
               onClick={() => setIsMenu(false)}
             >
-              Menu
+              <Link to="/menu">Menu</Link>
             </li>
             <li
               className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
               onClick={() => setIsMenu(false)}
             >
-              About Us
+              <Link to="/about-us">About Us</Link>
             </li>
             <li
               className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
               onClick={() => setIsMenu(false)}
             >
-              Service
+              <Link to="/service">Service</Link>
             </li>
           </motion.ul>
 
@@ -122,20 +104,20 @@ const Header = () => {
               className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
               alt="user-profile"
               onClick={() => {
-                return user ? setIsMenu(!isMenu) : login()
+                return user ? setIsMenu(!isMenu) : toggleModal(!modalShown)
               }}
             />
             {isMenu && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.6 }}
+                initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.6 }}
+                exit={{ opacity: 0, scale: 0.8 }}
                 className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
               >
                 {isAdmin && (
-                  <Link to={"/create-item"}>
+                  <Link to={"/admin/create-item"}>
                     <p
-                      className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:rounded-lg hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
                       onClick={() => setIsMenu(false)}
                     >
                       New Item <MdAdd />
@@ -144,7 +126,7 @@ const Header = () => {
                 )}
 
                 <p
-                  className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                  className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:rounded-lg hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
                   onClick={logout}
                 >
                   Logout <MdLogout />
@@ -177,7 +159,7 @@ const Header = () => {
             className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
             alt="user-profile"
             onClick={() => {
-              return user ? setIsMenu(!isMenu) : login()
+              return user ? setIsMenu(!isMenu) : toggleModal(!modalShown)
             }}
           />
           {isMenu && (
@@ -188,7 +170,7 @@ const Header = () => {
               className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
             >
               {isAdmin && (
-                <Link to={"/create-item"}>
+                <Link to={"/admin/create-item"}>
                   <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base">
                     New Item <MdAdd />
                   </p>
@@ -220,6 +202,8 @@ const Header = () => {
           )}
         </div>
       </div>
+
+      <LoginModal trigger={() => setIsMenu(!isMenu)} shown={modalShown} close={() => toggleModal(false)} />
     </header>
   )
 }

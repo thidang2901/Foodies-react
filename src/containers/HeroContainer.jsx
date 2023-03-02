@@ -4,10 +4,13 @@ import Delivery from "@assets/images/delivery.png"
 import HeroBg from "@assets/images/heroBg.png"
 import { heroData } from "@utils/data"
 
-const HomeContainer = () => {
+const HeroContainer = () => {
   return (
-    <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
-      <div className="py-2 flex-1 flex flex-col items-start justify-center gap-6">
+    <section
+      id="home"
+      className="h-[calc(100vh-100px)] lg:h-[calc(100vh-102px)] grid grid-cols-1 md:grid-cols-2 gap-2 w-full"
+    >
+      <div className="min-w-350 flex-1 flex flex-col items-start justify-center gap-6">
         <div className="flex flex-row items-center justify-center gap-2 bg-orange-100 px-4 py-1 rounded-full">
           <p className="text-base text-orange-500 font-semibold">Bike Delivery</p>
           <div className="w-8 h-8 bg-white rounded-full overflow-hidden drop-shadow-xl">
@@ -35,16 +38,16 @@ const HomeContainer = () => {
         </button>
       </div>
 
-      <div className="py-2 flex-1 flex items-center relative">
+      <div className="min-w-[150px] flex-1 flex items-center relative">
         <img src={HeroBg} className="ml-auto h-420 w-full lg:w-auto lg:h-650" alt="hero-bg" />
-        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center px-16 sm:px-0 md:px-10 lg:px-0 xl:px-12 2xl:px-40 py-4 gap-4 flex-wrap">
+        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center px-0 sm:px-0 md:px-0 lg:px-0 xl:px-14 2xl:px-36 3xl:px-40 py-4 gap-4 flex-wrap">
           {heroData &&
             heroData.map((n) => (
               <div
                 key={n.id}
-                className="lg:w-190 p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg"
+                className="max-w-[130px] sm:max-w-none md:w-190 p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg"
               >
-                <img src={n.imgSrc} className="w-20 lg:w-40 -mt-10 lg:-mt-20" alt="I1" />
+                <img src={n.imgSrc} className="w-20 md:w-28 lg:w-40 -mt-10 md:-mt-16 lg:-mt-20" alt="I1" />
                 <p className="text-base lg:text-xl font-semibold text-textColor mt-2 lg:mt-4">{n.name}</p>
                 <p className="text-[12px] lg:text-sm font-semibold text-lighttextGray my-1 lg:my-3">{n.description}</p>
                 <p className="text-sm font-semibold text-headingColor">
@@ -58,4 +61,4 @@ const HomeContainer = () => {
   )
 }
 
-export default HomeContainer
+export default HeroContainer
