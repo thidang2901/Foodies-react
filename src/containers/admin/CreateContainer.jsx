@@ -3,11 +3,11 @@ import { motion } from "framer-motion"
 import React, { useState } from "react"
 import { MdAttachMoney, MdCloudUpload, MdDelete, MdFastfood, MdFoodBank } from "react-icons/md"
 
-import { Loader } from "@components"
-import { actionType, useStateValue } from "@context"
-import { categoriesData } from "@utils/data"
-import { getAllFoodItems, saveItem } from "@utils/firebaseFunctions"
-import { storage } from "../configs/firebase.config"
+import { Loader } from "@/components"
+import { storage } from "@/configs/firebase.config"
+import { actionType, useStateValue } from "@/context"
+import { categoriesData } from "@/utils/data"
+import { getAllFoodItems, saveItem } from "@/utils/firebaseFunctions"
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("")
@@ -21,7 +21,7 @@ const CreateContainer = () => {
   const [alertStatus, setAlertStatus] = useState("danger")
   const [msg, setMsg] = useState(null)
 
-  const [{ foodItems }, dispatch] = useStateValue()
+  const [{ _ }, dispatch] = useStateValue()
 
   const fetchData = async () => {
     await getAllFoodItems().then((data) => {

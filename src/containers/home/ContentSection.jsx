@@ -2,10 +2,11 @@ import { motion } from "framer-motion"
 import React, { createRef, useState } from "react"
 import { MdChevronLeft, MdChevronRight } from "react-icons/md"
 
-import { Heading, ItemListRow } from "@components"
-import { useStateValue } from "@context"
+import { Heading } from "@/components"
+import { ItemListRow } from "@/components/Item"
+import { useStateValue } from "@/context"
 
-const HomeContentContainer = () => {
+const ContentSection = () => {
   const ref = createRef()
 
   const [{ foodItems }, dispatch] = useStateValue()
@@ -57,4 +58,4 @@ const HomeContentContainer = () => {
   )
 }
 
-export default HomeContentContainer
+export default ContentSection

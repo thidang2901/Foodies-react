@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 
-import { CategoryCard, Heading, ItemListRow } from "@components"
-import { useStateValue } from "@context"
-import { categoriesData } from "@utils/data"
+import { Heading } from "@/components"
+import { CategoryCard } from "@/components/Category"
+import { ItemListRow } from "@/components/Item"
+import { useStateValue } from "@/context"
+import { categoriesData } from "@/utils/data"
 
-const MenuContainer = () => {
+const MenuSection = () => {
   const [{ foodItems }, dispatch] = useStateValue()
   const [categoryFilter, setCategoryFilter] = useState("chicken")
 
@@ -37,4 +39,4 @@ const MenuContainer = () => {
   )
 }
 
-export default MenuContainer
+export default MenuSection

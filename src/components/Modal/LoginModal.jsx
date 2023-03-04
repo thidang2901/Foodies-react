@@ -1,16 +1,15 @@
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { motion } from "framer-motion"
 import React from "react"
 import { BsGoogle } from "react-icons/bs"
 
-import Logo from "@assets/logo/logo-no-background.svg"
+import { app } from "@/configs/firebase.config"
+import { actionType, useStateValue } from "@/context"
 import Modal from "./Modal"
 
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { app } from "../configs/firebase.config"
+import Logo from "@/assets/logo/logo-no-background.svg"
 
-import { actionType, useStateValue } from "@context"
-
-const LoginModal = ({ trigger, shown, close }) => {
+const LoginModal = ({ trigger, close }) => {
   const [{ user }, dispatch] = useStateValue()
 
   const firebaseAuth = getAuth(app)
@@ -34,7 +33,7 @@ const LoginModal = ({ trigger, shown, close }) => {
   }
 
   return (
-    <Modal shown={shown} close={close}>
+    <Modal close={close}>
       <div className="m-4 gap-4 flex flex-col items-center justify-center">
         <img src={Logo} alt="login-logo" className="w-56 my-5" />
 

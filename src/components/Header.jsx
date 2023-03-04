@@ -3,11 +3,11 @@ import React, { useState } from "react"
 import { MdAdd, MdLogout, MdShoppingBasket } from "react-icons/md"
 import { Link } from "react-router-dom"
 
-import { actionType, useStateValue } from "@context"
+import { LoginModal } from "@/components/Modal"
+import { actionType, useStateValue } from "@/context"
 
-import Avatar from "@assets/images/avatar.png"
-import Logo from "@assets/logo/logo-no-background.svg"
-import LoginModal from "./LoginModal"
+import Avatar from "@/assets/images/avatar.png"
+import Logo from "@/assets/logo/logo-no-background.svg"
 
 const Header = () => {
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue()
@@ -203,7 +203,7 @@ const Header = () => {
         </div>
       </div>
 
-      <LoginModal trigger={() => setIsMenu(!isMenu)} shown={modalShown} close={() => toggleModal(false)} />
+      {modalShown && <LoginModal trigger={() => setIsMenu(!isMenu)} close={() => toggleModal(false)} />}
     </header>
   )
 }

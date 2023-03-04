@@ -1,7 +1,8 @@
 import React, { forwardRef } from "react"
 
-import NotFound from "@assets/images/NotFound.svg"
-import { ItemCard } from "@components"
+import ItemCard from "./ItemCard"
+
+import NotFound from "@/assets/images/NotFound.svg"
 
 const ItemListRow = forwardRef(({ className, items, scrollable = false }, ref) => {
   return (

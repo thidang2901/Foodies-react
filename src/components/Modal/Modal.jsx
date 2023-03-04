@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
 import React from "react"
 
-const Modal = ({ children, shown, close }) => {
-  return shown ? (
+const Modal = ({ children, close }) => {
+  return (
     <motion.div
       initial={{ opacity: 0.7 }}
       animate={{ opacity: 1 }}
@@ -17,7 +17,7 @@ const Modal = ({ children, shown, close }) => {
         {children}
       </div>
     </motion.div>
-  ) : null
+  )
 }
 
 export default Modal

@@ -1,14 +1,15 @@
 import React from "react"
 
-import Delivery from "@assets/images/delivery.png"
-import HeroBg from "@assets/images/heroBg.png"
-import { heroData } from "@utils/data"
+import { heroData } from "@/utils/data"
 
-const HeroContainer = () => {
+import Delivery from "@/assets/images/delivery.png"
+import HeroBg from "@/assets/images/heroBg.png"
+
+const HeroSection = () => {
   return (
     <section
       id="home"
-      className="h-[calc(100vh-100px)] lg:h-[calc(100vh-102px)] grid grid-cols-1 md:grid-cols-2 gap-2 w-full"
+      className="h-auto sm:h-[calc(100vh-100px)] lg:h-[calc(100vh-102px)] grid grid-cols-1 md:grid-cols-2 gap-2 w-full"
     >
       <div className="min-w-350 flex-1 flex flex-col items-start justify-center gap-6">
         <div className="flex flex-row items-center justify-center gap-2 bg-orange-100 px-4 py-1 rounded-full">
@@ -40,7 +41,7 @@ const HeroContainer = () => {
 
       <div className="min-w-[150px] flex-1 flex items-center relative">
         <img src={HeroBg} className="ml-auto h-420 w-full lg:w-auto lg:h-650" alt="hero-bg" />
-        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center px-0 sm:px-0 md:px-0 lg:px-0 xl:px-14 2xl:px-36 3xl:px-40 py-4 gap-4 flex-wrap">
+        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center px-0 sm:px-32 md:px-0 lg:px-0 xl:px-14 2xl:px-36 3xl:px-40 py-4 gap-4 flex-wrap">
           {heroData &&
             heroData.map((n) => (
               <div
@@ -61,4 +62,4 @@ const HeroContainer = () => {
   )
 }
 
-export default HeroContainer
+export default HeroSection

@@ -3,18 +3,22 @@ import React, { useMemo, useState } from "react"
 import { MdOutlineKeyboardBackspace } from "react-icons/md"
 import { RiRefreshFill } from "react-icons/ri"
 
-import EmptyCart from "@assets/images/emptyCart.svg"
-import CartItem from "@components/CartItem"
-import { actionType, useStateValue } from "@context"
+import { CartItem } from "@/components/Item"
+import { actionType, useStateValue } from "@/context"
+
+import EmptyCart from "@/assets/images/emptyCart.svg"
 
 const CartContainer = () => {
-  const [{ cartShow, cartItems, cartTotal }, dispatch] = useStateValue()
+  const [{ cartShow, cartItems, cartTotal, user }, dispatch] = useStateValue()
+  const [modalShown, toggleModal] = useState(false)
   // TODO: implement setDeliveryPrice
   const [deliveryPrice, setDeliveryPrice] = useState(2.5)
 
   const handleCheckout = () => {
-    // TODO: implement checkout
     console.log("checkout this")
+    if (!user) {
+      toggleModal(true)
+    }
   }
 
   const showCart = () => {
@@ -99,6 +103,8 @@ const CartContainer = () => {
           <p className="text-xl text-textColor font-semibold">Add some items to your cart</p>
         </div>
       )}
+
+      {modalShown && <LoginModal close={() => toggleModal(false)} />}
     </motion.div>
   )
 }
