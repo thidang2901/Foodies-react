@@ -5,12 +5,9 @@ import { heroData } from "@/utils/data"
 import Delivery from "@/assets/images/delivery.png"
 import HeroBg from "@/assets/images/heroBg.png"
 
-const HeroSection = () => {
+const HeroSection = ({ contentRef }) => {
   return (
-    <section
-      id="home"
-      className="h-auto sm:h-[calc(100vh-100px)] lg:h-[calc(100vh-102px)] grid grid-cols-1 md:grid-cols-2 gap-2 w-full"
-    >
+    <section id="home-hero" className="h-auto md:h-screen grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
       <div className="min-w-350 flex-1 flex flex-col items-start justify-center gap-6">
         <div className="flex flex-row items-center justify-center gap-2 bg-orange-100 px-4 py-1 rounded-full">
           <p className="text-base text-orange-500 font-semibold">Bike Delivery</p>
@@ -34,6 +31,7 @@ const HeroSection = () => {
         <button
           type="button"
           className="md:w-auto text-white bg-gradient-to-br from-orange-400 to-orange-500 w-full px-4 py-2 rounded-lg hover:shadow-lg transition-all ease-in-out duration-100"
+          onClick={() => contentRef.current.scrollIntoView().scrollBy(0, -50)}
         >
           Order Now
         </button>

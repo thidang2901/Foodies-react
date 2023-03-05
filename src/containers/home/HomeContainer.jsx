@@ -1,19 +1,18 @@
-import React from "react"
+import React, { useRef } from "react"
 
 import { CartContainer } from "@/containers"
-import { ContentSection, HeroSection, MenuSection } from "@/containers/home"
+import { ContentSection, HeroSection } from "@/containers/home"
 import { useStateValue } from "@/context"
 
 const HomeContainer = () => {
   const [{ cartShow }] = useStateValue()
+  const contentRef = useRef()
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center">
-      <HeroSection />
+      <HeroSection contentRef={contentRef} />
 
-      <ContentSection />
-
-      <MenuSection />
+      <ContentSection ref={contentRef} />
 
       {cartShow && <CartContainer />}
     </div>

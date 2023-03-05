@@ -6,12 +6,12 @@ import { ItemListRow } from "@/components/Item"
 import { useStateValue } from "@/context"
 import { categoriesData } from "@/utils/data"
 
-const MenuSection = () => {
+const ContentSectionMenu = () => {
   const [{ foodItems }, dispatch] = useStateValue()
   const [categoryFilter, setCategoryFilter] = useState("chicken")
 
   return (
-    <section id="menu" className="w-full my-6">
+    <div className="w-full my-3">
       <div className="w-full flex flex-col items-center justify-center">
         <Heading title="Our Hot Dishes" className="before:left-6" />
 
@@ -35,8 +35,8 @@ const MenuSection = () => {
           />
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 
-export default MenuSection
+export default ContentSectionMenu
