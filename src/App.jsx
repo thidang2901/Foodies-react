@@ -27,7 +27,7 @@ function App() {
 
   return (
     <AnimatePresence mode="wait">
-      <div className="w-screen min-h-full flex flex-col bg-primary">
+      <div className="w-screen min-h-full flex flex-col bg-primary dark:bg-neutral-900">
         <Header />
 
         <main className="mt-14 md:mt-20 px-4 md:px-16 py-4 w-full">
