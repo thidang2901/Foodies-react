@@ -2,8 +2,8 @@ import { motion } from "framer-motion"
 import React, { createRef, useState } from "react"
 import { MdChevronLeft, MdChevronRight } from "react-icons/md"
 
-import { Heading } from "@/components"
 import { ItemListRow } from "@/components/Item"
+import { Heading } from "@/components/shared"
 import { useStateValue } from "@/context"
 
 const ContentSectionSlider = () => {

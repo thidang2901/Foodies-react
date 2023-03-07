@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion"
 import React, { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 
-import { Header } from "@/components"
+import { Header } from "@/components/shared"
 import { CreateContainer, HomeContainer, NotFoundContainer } from "@/containers"
 import { actionType, useStateValue } from "@/context"
 import { getAllFoodItems } from "@/utils/firebaseFunctions"

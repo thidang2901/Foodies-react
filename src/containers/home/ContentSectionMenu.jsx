@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
-import { Heading } from "@/components"
 import { CategoryCard } from "@/components/Category"
 import { ItemListRow } from "@/components/Item"
+import { Heading } from "@/components/shared"
 import { useStateValue } from "@/context"
 import { categoriesData } from "@/utils/data"
 

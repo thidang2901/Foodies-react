@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import React, { useState } from "react"
 import { MdAttachMoney, MdCloudUpload, MdDelete, MdFastfood, MdFoodBank } from "react-icons/md"
 
-import { Loader } from "@/components"
+import { Loader } from "@/components/shared"
 import { storage } from "@/configs/firebase.config"
 import { actionType, useStateValue } from "@/context"
 import { categoriesData } from "@/utils/data"
