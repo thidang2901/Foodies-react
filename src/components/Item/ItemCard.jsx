@@ -23,31 +23,42 @@ const ItemCard = ({ item }) => {
   return (
     <div
       key={item.id}
-      className="w-275 h-[175px] min-w-[275px] md:w-300 md:min-w-[300px] my-12 py-2 px-4 bg-cardOverlay rounded-lg backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative"
+      className="relative my-12 flex h-[175px] w-275 min-w-[275px] flex-col items-center justify-evenly rounded-lg bg-cardOverlay py-2 px-4 backdrop-blur-lg hover:drop-shadow-lg md:w-300 md:min-w-[300px]"
     >
-      <div className="w-full flex items-center justify-between">
-        <motion.div whileHover={{ scale: 1.2 }} className="w-40 h-40 -mt-8 drop-shadow-2xl">
-          <img src={item.imageURL} alt={`row-img-${item.id}`} className="w-full h-full object-contain" />
+      <div className="flex w-full items-center justify-between">
+        <motion.div
+          whileHover={{ scale: 1.2 }}
+          className="-mt-12 h-40 w-40 drop-shadow-2xl"
+        >
+          <img
+            src={item.imageURL}
+            alt={`row-img-${item.id}`}
+            className="h-full w-full object-contain"
+          />
         </motion.div>
         {cartItems[item.id]?.cartQty > 0 ? (
-          <div className="flex items-center justify-center -mt-8">
+          <div className="-mt-8 flex items-center justify-center">
             <ItemQuantityControl item={cartItems[item.id]} />
           </div>
         ) : (
           <motion.div
             whileTap={{ scale: 0.75 }}
-            className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md -mt-8"
+            className="-mt-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-red-600 hover:shadow-md"
             onClick={() => addToCart(item)}
           >
             <MdShoppingBasket className="text-white" />
           </motion.div>
         )}
       </div>
-      <div className="w-full flex flex-col items-end justify-end -mt-8">
-        <p className="text-textColor font-semibold capitalize text-base md:text-lg">{item.title}</p>
-        <p className="mt-1 text-sm text-gray-500">{item.calories} Calories</p>
+      <div className="-mt-8 flex w-full flex-col items-end justify-end">
+        <p className="text-base font-semibold capitalize text-textColor dark:text-primary md:text-lg">
+          {item.title}
+        </p>
+        <p className="mt-1 text-sm text-gray-500 dark:text-primary">
+          {item.calories} Calories
+        </p>
         <div className="flex items-center gap-8">
-          <p className="text-lg text-headingColor font-semibold">
+          <p className="text-lg font-semibold text-headingColor dark:text-primary">
             <span className="text-sm text-red-500">$</span> {item.price}
           </p>
         </div>

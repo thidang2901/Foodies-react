@@ -11,11 +11,11 @@ const ContentSectionMenu = () => {
   const [categoryFilter, setCategoryFilter] = useState("chicken")
 
   return (
-    <div className="w-full my-3">
-      <div className="w-full flex flex-col items-center justify-center">
+    <div className="my-3 w-full">
+      <div className="flex w-full flex-col items-center justify-center">
         <Heading title="Our Hot Dishes" className="before:left-6" />
 
-        <div className="w-full flex items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none">
+        <div className="flex w-full items-center justify-start gap-8 overflow-x-scroll py-6 scrollbar-none lg:justify-center">
           {categoriesData &&
             categoriesData.map((category) => (
               <CategoryCard
@@ -31,7 +31,9 @@ const ContentSectionMenu = () => {
           <ItemListRow
             className="flex items-center justify-center"
             scrollable={false}
-            items={foodItems?.filter((item) => item.category === categoryFilter)}
+            items={foodItems?.filter(
+              (item) => item.category === categoryFilter
+            )}
           />
         </div>
       </div>

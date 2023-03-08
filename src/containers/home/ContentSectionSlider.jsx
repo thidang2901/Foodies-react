@@ -19,7 +19,10 @@ const ContentSectionSlider = () => {
     ref.current.scrollLeft += offset
     setScrollX(scrollX + offset) // update current position X
 
-    if (Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <= ref.current.offsetWidth) {
+    if (
+      Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <=
+      ref.current.offsetWidth
+    ) {
       setEndScroll(true)
     } else {
       setEndScroll(false)
@@ -27,14 +30,14 @@ const ContentSectionSlider = () => {
   }
 
   return (
-    <div className="w-full my-3">
-      <div className="w-full flex items-center justify-between">
+    <div className="my-3 w-full">
+      <div className="flex w-full items-center justify-between">
         <Heading title="Our fresh & healthy fruits" />
 
-        <div className="hidden md:flex gap-3 items-center">
+        <div className="hidden items-center gap-3 md:flex">
           <motion.button
             whileTap={{ scale: 0.75 }}
-            className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center cursor-pointer"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-orange-300 hover:bg-orange-500 dark:bg-orange-700 dark:hover:bg-orange-600"
             onClick={() => handleScroll(-200)}
             disabled={scrollX === 0}
           >
@@ -43,7 +46,7 @@ const ContentSectionSlider = () => {
 
           <motion.button
             whileTap={{ scale: 0.75 }}
-            className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center cursor-pointer"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-orange-300 hover:bg-orange-500 dark:bg-orange-700 dark:hover:bg-orange-600"
             onClick={() => handleScroll(200)}
             disabled={endScroll}
           >

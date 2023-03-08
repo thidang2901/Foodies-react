@@ -8,6 +8,8 @@ import { actionType, useStateValue } from "@/context"
 
 import EmptyCart from "@/assets/images/emptyCart.svg"
 
+import "./styles.css"
+
 const CartContainer = () => {
   const [{ cartShow, cartItems, cartTotal, user }, dispatch] = useStateValue()
   const [modalShown, toggleModal] = useState(false)
@@ -43,16 +45,21 @@ const CartContainer = () => {
       initial={{ opacity: 0, x: 200 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -200 }}
-      className="fixed top-0 right-0 w-full md:w-375 h-screen bg-white drop-shadow-md flex flex-col z-[101]"
+      className="cart"
     >
-      <div className="w-full flex items-center justify-between p-4">
-        <motion.div whileTap={{ scale: 0.75 }} onClick={showCart}>
-          <MdOutlineKeyboardBackspace className="text-textColor text-3xl cursor-pointer" />
+      <div className="cart__header">
+        <motion.div
+          whileTap={{ scale: 0.75 }}
+          whileHover={{ scale: 1.1 }}
+          onClick={showCart}
+        >
+          <MdOutlineKeyboardBackspace className="cart__header-backspace" />
         </motion.div>
-        <p className="text-textColor text-lg font-semibold">Cart</p>
+        <p className="cart__header-title">Cart</p>
         <motion.p
           whileTap={{ scale: 0.75 }}
-          className="flex items-center gap-2 p-1 px-2 my-2 bg-gray-100 rounded-md hover:shadow-md cursor-pointer text-textColor text-base"
+          whileHover={{ scale: 1.1 }}
+          className="cart__header-clear"
           onClick={clearCart}
         >
           Clear <RiRefreshFill />
@@ -61,36 +68,39 @@ const CartContainer = () => {
 
       {/* cart item section */}
       {Object.keys(cartItems).length > 0 ? (
-        <div className="w-full h-full bg-cartBg flex flex-col">
+        <div className="cart__content">
           {/* cart item list */}
-          <div className="w-full h-340 md:h-420 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
+          <div className="cart__content-items">
             {Object.values(cartItems).map((item) => (
               <CartItem key={item.id} item={item} />
             ))}
           </div>
 
           {/* cart total */}
-          <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
-            <div className="w-full flex items-center justify-between">
-              <p className="text-gray-400 text-lg">Sub Total</p>
-              <p className="text-gray-400 text-lg">$ {cartTotal}</p>
-            </div>
-            <div className="w-full flex items-center justify-between">
-              <p className="text-gray-400 text-lg">Delivery</p>
-              <p className="text-gray-400 text-lg">$ {deliveryPrice}</p>
+          <div className="cart__content-checkout">
+            <div className="cart__content-checkout-block">
+              <p className="cart__content-checkout-subTotal">Sub Total</p>
+              <p className="cart__content-checkout-subTotal">$ {cartTotal}</p>
             </div>
 
-            <div className="w-full border-b border-gray-600 my-2"></div>
+            <div className="cart__content-checkout-block">
+              <p className="cart__content-checkout-subTotal">Delivery</p>
+              <p className="cart__content-checkout-subTotal">
+                $ {deliveryPrice}
+              </p>
+            </div>
 
-            <div className="w-full flex items-center justify-between">
-              <p className="text-gray-200 text-xl font-semibold">Total</p>
-              <p className="text-gray-200 text-xl font-semibold">$ {totalPrice}</p>
+            <div className="my-2 w-full border-b border-gray-600"></div>
+
+            <div className="cart__content-checkout-block">
+              <p className="cart__content-checkout-total">Total</p>
+              <p className="cart__content-checkout-total">$ {totalPrice}</p>
             </div>
 
             <motion.button
               whileTap={{ scale: 0.8 }}
               type="button"
-              className="w-full p-2 my-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg  hover:shadow-lg transition-all duration-150 ease-out"
+              className="cart__content-checkoutBtn"
               onClick={handleCheckout}
             >
               Check Out
@@ -98,9 +108,13 @@ const CartContainer = () => {
           </div>
         </div>
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center gap-6">
-          <img src={EmptyCart} alt="img-empty-cart" className="w-300" />
-          <p className="text-xl text-textColor font-semibold">Add some items to your cart</p>
+        <div className="cart__empty">
+          <img
+            className="cart__empty-img"
+            src={EmptyCart}
+            alt="img-empty-cart"
+          />
+          <p className="cart__empty-text">Add some items to your cart</p>
         </div>
       )}
 

@@ -42,21 +42,35 @@ const ItemQuantityControl = ({ item, bgColor = "white" }) => {
   )
 
   return (
-    <div className="group flex items-center gap-2 ml-auto cursor-pointer select-none">
-      <motion.div whileTap={{ scale: 0.75 }} onClick={() => updateQty("remove", item.id)}>
-        <BiMinus className={`${isBgWhite ? "text-textColor" : "text-gray-50"}  cursor-pointer`} />
+    <div className="group ml-auto flex cursor-pointer select-none items-center gap-2">
+      <motion.div
+        whileTap={{ scale: 0.75 }}
+        onClick={() => updateQty("remove", item.id)}
+      >
+        <BiMinus
+          className={`${
+            isBgWhite ? "text-textColor dark:text-primary" : "text-gray-50"
+          }  cursor-pointer`}
+        />
       </motion.div>
 
       <p
-        className={`w-5 h-5 rounded-sm ${
+        className={`h-5 w-5 rounded-sm ${
           isBgWhite ? "bg-gray-200 text-textColor" : "bg-cartBg text-gray-50"
         }   flex items-center justify-center`}
       >
         {item.cartQty}
       </p>
 
-      <motion.div whileTap={{ scale: 0.75 }} onClick={() => updateQty("add", item.id)}>
-        <BiPlus className={`${isBgWhite ? "text-textColor" : "text-gray-50"}  cursor-pointer`} />
+      <motion.div
+        whileTap={{ scale: 0.75 }}
+        onClick={() => updateQty("add", item.id)}
+      >
+        <BiPlus
+          className={`${
+            isBgWhite ? "text-textColor dark:text-primary" : "text-gray-50"
+          }  cursor-pointer`}
+        />
       </motion.div>
     </div>
   )

@@ -3,11 +3,11 @@ import { Link } from "react-router-dom"
 
 const NotFoundContainer = () => {
   return (
-    <main class="grid min-h-full place-items-center py-24 px-6 sm:py-32 lg:px-8">
+    <section class="grid h-screen place-items-center py-24 px-6 sm:py-32 lg:px-8">
       <div class="text-center">
         <p class="text-5xl sm:text-9xl font-semibold text-orange-600">404</p>
-        <h1 class="mt-4 text-3xl font-bold tracking-tight text-textColor sm:text-5xl">Page not found</h1>
-        <p class="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t find the page you’re looking for.</p>
+        <h1 class="mt-4 text-3xl font-bold tracking-tight text-textColor dark:text-white sm:text-5xl">Page not found</h1>
+        <p class="mt-6 text-base leading-7 text-gray-600 dark:text-primary">Sorry, we couldn’t find the page you’re looking for.</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
           <Link
             to="/"
@@ -17,7 +17,7 @@ const NotFoundContainer = () => {
           </Link>
         </div>
       </div>
-    </main>
+    </section>
   )
 }
 

@@ -9,7 +9,7 @@ const HomeContainer = () => {
   const contentRef = useRef()
 
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center">
+    <div className="flex h-auto w-full flex-col items-center justify-center">
       <HeroSection contentRef={contentRef} />
 
       <ContentSection ref={contentRef} />

@@ -1,0 +1,57 @@
+.header {
+  @apply fixed z-50 
+  w-screen select-none 
+  bg-primary 
+  py-3 px-4 
+  dark:bg-neutral-900 
+  md:py-6 md:px-16;
+}
+
+.header .header__desktop {
+  @apply hidden h-full w-full items-center justify-between md:flex;
+}
+
+.header .header__desktop li {
+  @apply cursor-pointer
+  text-base text-textColor
+  transition-all duration-100 ease-in-out 
+  hover:text-headingColor 
+  dark:text-primary dark:hover:text-gray-300;
+}
+
+.header .header__mobile {
+  @apply flex h-full w-full items-center justify-between md:hidden;
+}
+
+.header .header__mobile li,
+.header .header__mobile li span {
+  @apply flex cursor-pointer items-center gap-3
+  px-4 py-2 
+  text-base text-textColor
+  transition-all duration-100 ease-in-out
+  hover:rounded-lg
+  hover:bg-slate-100 hover:text-headingColor 
+  dark:text-primary dark:hover:text-headingColor;
+}
+
+.header .header__submenu {
+  @apply flex cursor-pointer items-center gap-3 
+  px-4 py-2 
+  text-base text-textColor 
+  transition-all duration-100 ease-in-out 
+  hover:rounded-lg 
+  hover:bg-slate-100
+  dark:text-primary dark:hover:text-headingColor;
+}
+
+.header .header__submenu-loginBtn {
+  @apply m-2 flex cursor-pointer items-center justify-center gap-3 rounded-md bg-gray-200 p-2 text-base text-textColor shadow-md transition-all duration-100 ease-in-out hover:bg-slate-300;
+}
+
+.header .header__cart {
+  @apply cursor-pointer
+  text-2xl text-textColor
+  hover:text-headingColor 
+  dark:text-primary
+  dark:hover:text-gray-300;
+}

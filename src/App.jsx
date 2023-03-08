@@ -27,16 +27,20 @@ function App() {
 
   return (
     <AnimatePresence mode="wait">
-      <div className="w-screen min-h-full flex flex-col bg-primary dark:bg-neutral-900">
+      <div className="flex min-h-full w-screen flex-col bg-primary dark:bg-neutral-900">
         <Header />
 
-        <main className="mt-14 md:mt-20 px-4 md:px-16 py-4 w-full">
+        <main className="mt-14 w-full px-4 py-4 md:mt-20 md:px-16">
           <Routes>
             <Route exact path="/" element={<HomeContainer />} />
             <Route exact path="/menu" element={<HomeContainer />} />
             <Route exact path="/about-us" element={<HomeContainer />} />
             <Route exact path="/service" element={<HomeContainer />} />
-            <Route exact path="/admin/create-item" element={<CreateContainer />} />
+            <Route
+              exact
+              path="/admin/create-item"
+              element={<CreateContainer />}
+            />
             <Route path="/*" element={<NotFoundContainer />} />
           </Routes>
         </main>

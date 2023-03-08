@@ -32,31 +32,58 @@ const LoginModal = ({ trigger, close }) => {
     }
   }
 
+  const normalLogin = () => {
+    console.log("normal login")
+  }
+
   return (
     <Modal close={close}>
-      <div className="m-4 gap-4 flex flex-col items-center justify-center">
-        <img src={Logo} alt="login-logo" className="w-56 my-5" />
+      <div className="m-4 flex flex-col items-center justify-center gap-4">
+        <img src={Logo} alt="login-logo" className="my-5 w-56" />
 
-        <div className="w-300 flex flex-col gap-2">
-          <label>Username</label>
-          <input type="text" className="bg-gray-100 rounded-md px-2 py-1" key="username" />
+        <div className="flex w-300 flex-col gap-2">
+          <label className="dark:text-primary">Username</label>
+          <input
+            type="text"
+            className="rounded-md bg-gray-100 px-2 py-1"
+            key="username"
+          />
         </div>
 
-        <div className="w-300 flex flex-col gap-2">
-          <label>Password</label>
-          <input type="password" className="bg-gray-100 rounded-md px-2 py-1" key="password" />
+        <div className="flex w-300 flex-col gap-2">
+          <label className="dark:text-primary">Password</label>
+          <input
+            type="password"
+            className="rounded-md bg-gray-100  px-2 py-1"
+            key="password"
+          />
+        </div>
+
+        <div className="flex w-300 items-center justify-between">
+          <a href="#forgot-password" className="text-sm text-gray-400">
+            Forgot password?
+          </a>
+
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            type="button"
+            className="my-2 rounded-lg bg-orange-500 px-6 py-2 hover:shadow-lg sm:px-10"
+            onClick={normalLogin}
+          >
+            <span className="text-base text-white">Log in</span>
+          </motion.button>
         </div>
 
         <div className="mt-3 flex items-center">
-          <hr className="flex-grow border-1 w-14" />
-          <div className="text-gray-400 px-2">or</div>
-          <hr className="flex-grow border-1 w-14" />
+          <hr className="border-1 w-14 flex-grow" />
+          <div className="px-2 text-gray-400 dark:text-primary">or</div>
+          <hr className="border-1 w-14 flex-grow" />
         </div>
 
         <motion.button
           whileTap={{ scale: 0.9 }}
           type="button"
-          className="w-full md:w-auto flex items-center justify-center gap-2 bg-gray-100 my-5 px-12 py-2 rounded-lg"
+          className="my-5 flex w-full items-center justify-center gap-2 rounded-lg bg-gray-100 px-12 py-2 hover:shadow-lg md:w-auto"
           onClick={googleLogin}
         >
           <BsGoogle />
