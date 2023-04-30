@@ -7,10 +7,10 @@ const ThemeSwitcher = ({ label }) => {
   const { isDark, toggleTheme } = useThemeValue()
 
   return (
-    <div className="flex items-center gap-3" onClick={toggleTheme}>
+    <span className="flex items-center gap-3 w-full" onClick={toggleTheme}>
       {label ?? null}
       {isDark ? <FaMoon /> : <FaSun />}
-    </div>
+    </span>
   )
 }
 
