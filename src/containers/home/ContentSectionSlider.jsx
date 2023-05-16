@@ -19,10 +19,7 @@ const ContentSectionSlider = () => {
     ref.current.scrollLeft += offset
     setScrollX(scrollX + offset) // update current position X
 
-    if (
-      Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <=
-      ref.current.offsetWidth
-    ) {
+    if (Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <= ref.current.offsetWidth) {
       setEndScroll(true)
     } else {
       setEndScroll(false)
@@ -32,7 +29,7 @@ const ContentSectionSlider = () => {
   return (
     <div className="my-3 w-full">
       <div className="flex w-full items-center justify-between">
-        <Heading title="Our fresh & healthy fruits" />
+        <Heading title="Best of the week" className="before:w-32" />
 
         <div className="hidden items-center gap-3 md:flex">
           <motion.button

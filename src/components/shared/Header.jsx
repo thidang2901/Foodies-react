@@ -1,7 +1,8 @@
 import { motion } from "framer-motion"
 import React, { useState } from "react"
-import { MdAdd, MdLogin, MdLogout, MdShoppingBasket } from "react-icons/md"
+import { MdAdd, MdHome, MdLogin, MdLogout, MdShoppingBasket } from "react-icons/md"
 import { Link } from "react-router-dom"
+import { HashLink } from "react-router-hash-link"
 
 import { LoginModal } from "@/components/Modal"
 import { ThemeSwitcher } from "@/components/shared"
@@ -13,12 +14,12 @@ import Logo from "@/assets/logo/logo-no-background.svg"
 import "./styles.css"
 
 const Header = () => {
-  const [{ user, cartShow, cartItems }, dispatch] = useStateValue()
+  const [{ user, cartShow, cartItems, activeScreen }, dispatch] = useStateValue()
   const [openSubMenu, setOpenSubMenu] = useState(false)
   const [modalShown, toggleModal] = useState(false)
 
   // TODO: add admin privilege feature
-  const isAdmin = user && user.email === "dkthi2901@gmail.com"
+  const isAdmin = user && user.email === import.meta.env.VITE_ADMIN_EMAIL
 
   const numCartItems = Object.keys(cartItems).reduce((prevNum, currentId) => {
     if (cartItems[currentId]?.cartQty) {
@@ -65,11 +66,7 @@ const Header = () => {
     <header className="header">
       {/* desktop & tablet */}
       <div className="header__desktop">
-        <Link
-          to={"/"}
-          className="flex items-center gap-2"
-          onClick={closeSubMenu}
-        >
+        <Link to={"/"} className="flex items-center gap-2" onClick={closeSubMenu}>
           <img src={Logo} className="w-40 object-cover" alt="logo" />
         </Link>
 
@@ -81,32 +78,37 @@ const Header = () => {
             className="flex items-center gap-8"
           >
             <li onClick={closeSubMenu}>
-              <Link to="/">Home</Link>
+              <HashLink smooth to="/#home">
+                Home
+              </HashLink>
             </li>
             <li onClick={closeSubMenu}>
-              <Link to="/menu">Menu</Link>
+              <HashLink smooth to="/#menu">
+                Menu
+              </HashLink>
             </li>
             <li onClick={closeSubMenu}>
-              <Link to="/about-us">About Us</Link>
+              <HashLink smooth to="/#about">
+                About Us
+              </HashLink>
             </li>
             <li onClick={closeSubMenu}>
-              <Link to="/service">Service</Link>
+              <HashLink smooth to="/#contact">
+                Contact Us
+              </HashLink>
             </li>
           </motion.ul>
 
-          <div
-            className="relative flex items-center justify-center"
-            onClick={showCart}
-          >
-            <MdShoppingBasket className="header__cart" />
-            {numCartItems > 0 && (
-              <div className=" absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-cartNumBg">
-                <p className="text-xs font-semibold text-white">
-                  {numCartItems}
-                </p>
-              </div>
-            )}
-          </div>
+          {activeScreen === "home" && (
+            <div className="relative flex items-center justify-center" onClick={showCart}>
+              <MdShoppingBasket className="header__cart" />
+              {numCartItems > 0 && (
+                <div className=" absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-cartNumBg">
+                  <p className="text-xs font-semibold text-white">{numCartItems}</p>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="relative">
             <motion.img
@@ -153,17 +155,20 @@ const Header = () => {
 
       {/* mobile */}
       <div className="header__mobile">
-        <div
-          className="relative flex items-center justify-center"
-          onClick={showCart}
-        >
-          <MdShoppingBasket className="header__cart" />
-          {numCartItems > 0 && (
-            <div className=" absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-cartNumBg">
-              <p className="text-xs font-semibold text-white">{numCartItems}</p>
-            </div>
-          )}
-        </div>
+        {activeScreen === "home" ? (
+          <div className="relative flex items-center justify-center" onClick={showCart}>
+            <MdShoppingBasket className="header__cart" />
+            {numCartItems > 0 && (
+              <div className=" absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-cartNumBg">
+                <p className="text-xs font-semibold text-white">{numCartItems}</p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link to="/">
+            <MdHome className="header__cart" />
+          </Link>
+        )}
 
         <Link to={"/"} className="flex items-center gap-2">
           <img src={Logo} className="h-8 object-cover" alt="logo" />
@@ -186,17 +191,25 @@ const Header = () => {
               onClick={closeSubMenu}
             >
               <ul className="flex flex-col">
-                <li>
-                  <Link to="/">Home</Link>
+                <li onClick={closeSubMenu}>
+                  <HashLink smooth to="/#home">
+                    Home
+                  </HashLink>
                 </li>
-                <li>
-                  <Link to="/menu">Menu</Link>
+                <li onClick={closeSubMenu}>
+                  <HashLink smooth to="/#menu">
+                    Menu
+                  </HashLink>
                 </li>
-                <li>
-                  <Link to="/about-us">About Us</Link>
+                <li onClick={closeSubMenu}>
+                  <HashLink smooth to="/#about">
+                    About Us
+                  </HashLink>
                 </li>
-                <li>
-                  <Link to="/service">Service</Link>
+                <li onClick={closeSubMenu}>
+                  <HashLink smooth to="/#contact">
+                    Contact Us
+                  </HashLink>
                 </li>
 
                 <p className="header__submenu">
@@ -219,10 +232,7 @@ const Header = () => {
                   Logout <MdLogout />
                 </p>
               ) : (
-                <p
-                  className="header__submenu-loginBtn"
-                  onClick={toggleLoginModal}
-                >
+                <p className="header__submenu-loginBtn" onClick={toggleLoginModal}>
                   Login <MdLogin />
                 </p>
               )}
@@ -231,9 +241,7 @@ const Header = () => {
         </div>
       </div>
 
-      {modalShown && (
-        <LoginModal trigger={closeSubMenu} close={closeLoginModal} />
-      )}
+      {modalShown && <LoginModal trigger={closeSubMenu} close={closeLoginModal} />}
     </header>
   )
 }
