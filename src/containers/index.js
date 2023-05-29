@@ -1,4 +1,5 @@
 export { CreateContainer } from "./admin"
 export { CartContainer } from "./cart"
+export { CheckoutContainer, CompletionContainer } from "./checkout"
 export * from "./common"
 export { HomeContainer } from "./home"

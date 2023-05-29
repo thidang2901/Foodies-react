@@ -6,14 +6,14 @@ import { Heading } from "@/components/shared"
 import { useStateValue } from "@/context"
 import { categoriesData } from "@/utils/data"
 
-const ContentSectionMenu = () => {
+const MenuSection = () => {
   const [{ foodItems }, dispatch] = useStateValue()
   const [categoryFilter, setCategoryFilter] = useState("chicken")
 
   return (
-    <div className="my-3 w-full">
+    <section className="my-3 h-full w-full md:scroll-mt-[100px]" id="menu">
       <div className="flex w-full flex-col items-center justify-center">
-        <Heading title="Our Hot Dishes" className="before:left-6" />
+        <Heading title="Menu" className="before:left-4 before:w-10" />
 
         <div className="flex w-full items-center justify-start gap-8 overflow-x-scroll py-6 scrollbar-none lg:justify-center">
           {categoriesData &&
@@ -31,14 +31,12 @@ const ContentSectionMenu = () => {
           <ItemListRow
             className="flex items-center justify-center"
             scrollable={false}
-            items={foodItems?.filter(
-              (item) => item.category === categoryFilter
-            )}
+            items={foodItems?.filter((item) => item.category === categoryFilter)}
           />
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
-export default ContentSectionMenu
+export default MenuSection

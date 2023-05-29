@@ -1,7 +1,7 @@
 .header {
   @apply fixed z-50 
   w-screen select-none 
-  bg-primary 
+  bg-white 
   py-3 px-4 
   dark:bg-neutral-900 
   md:py-6 md:px-16;
@@ -42,6 +42,11 @@
   hover:rounded-lg 
   hover:bg-slate-100
   dark:text-primary dark:hover:text-headingColor;
+}
+
+.header .header__mobile li a,
+.header .header__submenu a {
+  @apply w-full;
 }
 
 .header .header__submenu-loginBtn {

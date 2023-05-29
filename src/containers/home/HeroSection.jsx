@@ -9,7 +9,7 @@ import HeroBg from "@/assets/images/heroBg.png"
 const HeroSection = ({ contentRef }) => {
   return (
     <section
-      id="home-hero"
+      id="hero"
       className="grid h-auto w-full grid-cols-1 gap-2 md:h-screen md:grid-cols-2"
     >
       <div className="flex min-w-350 flex-1 flex-col items-start justify-center gap-6">
@@ -26,7 +26,7 @@ const HeroSection = ({ contentRef }) => {
           </div>
         </div>
 
-        <p className="text-[1.5rem] font-bold tracking-wide text-headingColor dark:text-white md:max-w-2xl md:text-[3.5rem]">
+        <p className="text-[1.5rem] font-bold tracking-wide text-headingColor dark:text-white md:max-w-2xl md:text-[3rem]">
           <span className="text-[2rem] text-orange-600 md:text-[4rem]">
             Foodies
           </span>
@@ -76,8 +76,13 @@ const HeroSection = ({ contentRef }) => {
                 <p className="my-1 text-[12px] font-semibold text-lighttextGray dark:text-gray-200 lg:my-3 lg:text-sm">
                   {n.description}
                 </p>
-                <p className="text-sm font-semibold text-headingColor dark:text-primary">
-                  <span className="text-xs text-red-600">$</span> {n.price}
+                <p className="text-sm font-semibold text-headingColor dark:text-gray-300">
+                  <span className="text-xs line-through">
+                    $ {parseFloat(n.price * 1.2).toFixed(2)}
+                  </span>{" "}
+                  <span className="text-sm text-red-600 dark:text-red-500">
+                    ${n.price}
+                  </span>
                 </p>
               </div>
             ))}

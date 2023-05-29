@@ -6,14 +6,18 @@ const ThemeContext = createContext()
 
 const ThemeProvider = ({ children }) => {
   const [colorTheme, setTheme] = useTheme()
-  const [darkSide, setDarkSide] = useState(colorTheme === "light")
+  const [isDark, setDarkSide] = useState(colorTheme === "dark")
 
   const toggleTheme = () => {
     setTheme(colorTheme)
     setDarkSide((prev) => !prev)
   }
 
-  return <ThemeContext.Provider value={{ isDark: darkSide, toggleTheme }}>{children}</ThemeContext.Provider>
+  return (
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  )
 }
 
 const useThemeValue = () => useContext(ThemeContext)
