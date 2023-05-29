@@ -6,6 +6,7 @@ const actionType = {
   SET_SHOW_CART: "SET_SHOW_CART",
   SET_CART: "SET_CART",
   REMOVE_CART: "REMOVE_CART",
+  SET_ACTIVE_SCREEN: "SET_ACTIVE_SCREEN",
 }
 
 const reducer = (state, action) => {
@@ -47,6 +48,12 @@ const reducer = (state, action) => {
         ...state,
         cartItems: {},
         cartTotal: 0,
+      }
+    }
+    case actionType.SET_ACTIVE_SCREEN: {
+      return {
+        ...state,
+        activeScreen: action.activeScreen,
       }
     }
   }

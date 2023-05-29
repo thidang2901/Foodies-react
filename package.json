@@ -16,6 +16,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.52.1",
+    "axios": "^1.4.0",
     "firebase": "^9.17.1",
     "framer-motion": "^9.0.1",
     "react": "^18.2.0",

@@ -1,9 +1,17 @@
+import { loadStripe } from "@stripe/stripe-js"
+import axios from "axios"
 import { AnimatePresence } from "framer-motion"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 
 import { Header } from "@/components/shared"
-import { CreateContainer, HomeContainer, NotFoundContainer } from "@/containers"
+import {
+  CheckoutContainer,
+  CompletionContainer,
+  CreateContainer,
+  HomeContainer,
+  NotFoundContainer,
+} from "@/containers"
 import { actionType, useStateValue } from "@/context"
 import { getAllFoodItems } from "@/utils/firebaseFunctions"
 
@@ -24,6 +32,18 @@ function App() {
     fetchData()
   }, [])
 
+  const [stripePromise, setStripePromise] = useState(null)
+  useEffect(() => {
+    axios
+      .request("/config", {
+        baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
+      })
+      .then(async (r) => {
+        const { publishableKey } = await r.data
+        setStripePromise(loadStripe(publishableKey))
+      })
+  }, [])
+
   return (
     <AnimatePresence mode="wait">
       <div className="flex min-h-full w-screen flex-col bg-white dark:bg-neutral-900">
@@ -32,6 +52,15 @@ function App() {
         <main className="mt-14 w-full px-4 py-4 md:mt-20 md:px-16">
           <Routes>
             <Route exact path="/" element={<HomeContainer />} />
+            <Route
+              exact
+              path="/checkout"
+              element={<CheckoutContainer stripePromise={stripePromise} />}
+            />
+            <Route
+              path="/completion"
+              element={<CompletionContainer stripePromise={stripePromise} />}
+            />
             <Route exact path="/admin/create-item" element={<CreateContainer />} />
             <Route path="/*" element={<NotFoundContainer />} />
           </Routes>

@@ -1,18 +1,7 @@
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable
-} from "firebase/storage"
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { motion } from "framer-motion"
-import React, { useState } from "react"
-import {
-  MdAttachMoney,
-  MdCloudUpload,
-  MdDelete,
-  MdFastfood,
-  MdFoodBank
-} from "react-icons/md"
+import React, { useEffect, useState } from "react"
+import { MdAttachMoney, MdCloudUpload, MdDelete, MdFastfood, MdFoodBank } from "react-icons/md"
 
 import { Loader } from "@/components/shared"
 import { storage } from "@/configs/firebase.config"
@@ -34,6 +23,13 @@ const CreateContainer = () => {
 
   const [{ _ }, dispatch] = useStateValue()
 
+  useEffect(() => {
+    dispatch({
+      type: actionType.SET_ACTIVE_SCREEN,
+      activeScreen: "admin_create",
+    })
+  }, [])
+
   const fetchData = async () => {
     await getAllFoodItems().then((data) => {
       dispatch({
@@ -45,6 +41,7 @@ const CreateContainer = () => {
 
   const uploadImage = (e) => {
     setIsLoading(true)
+
     const imageFile = e.target.files[0]
     const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`)
     const uploadTask = uploadBytesResumable(storageRef, imageFile)
@@ -52,8 +49,7 @@ const CreateContainer = () => {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const uploadProgress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       },
       (error) => {
         handleError({ msg: "Error while uploading, try again ☹️", error })
@@ -199,9 +195,7 @@ const CreateContainer = () => {
                   <label className="flex h-full w-full cursor-pointer flex-col items-center justify-center">
                     <div className="flex h-full w-full flex-col items-center justify-center gap-2">
                       <MdCloudUpload className="text-3xl text-gray-500 hover:text-gray-700" />
-                      <p className="text-gray-500 hover:text-gray-700">
-                        Click here to upload
-                      </p>
+                      <p className="text-gray-500 hover:text-gray-700">Click here to upload</p>
                     </div>
                     <input
                       type="file"

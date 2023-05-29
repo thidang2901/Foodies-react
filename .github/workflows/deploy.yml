@@ -47,6 +47,7 @@ jobs:
           VITE_FIREBASE_MESSAGING_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
           VITE_ADMIN_EMAIL: ${{ secrets.VITE_ADMIN_EMAIL }}
+          VITE_BACKEND_BASE_URL: ${{ secrets.VITE_BACKEND_BASE_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
