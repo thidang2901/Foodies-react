@@ -1,10 +1,10 @@
-import axios from "axios"
 import React, { useEffect, useMemo, useState } from "react"
 import { MdOutlineKeyboardBackspace } from "react-icons/md"
 import { Link } from "react-router-dom"
 
 import { CheckoutAddress, CheckoutPayment } from "@/components/Checkout"
 import { CheckoutItemCard } from "@/components/Item"
+import axios from "@/configs/axios"
 import { actionType, useStateValue } from "@/context"
 import { DELIVERY_OPTIONS, PAYMENT_METHODS } from "@/utils/constants"
 
@@ -66,8 +66,6 @@ const CheckoutContainer = ({ stripePromise }) => {
     axios
       .request("/create-payment-intent", {
         method: "POST",
-        baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
-        headers: { "Content-Type": "application/json" },
         data: { amount: total },
       })
       .then((res) => res.data)

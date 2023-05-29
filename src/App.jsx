@@ -1,10 +1,10 @@
 import { loadStripe } from "@stripe/stripe-js"
-import axios from "axios"
 import { AnimatePresence } from "framer-motion"
 import React, { useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 
 import { Header } from "@/components/shared"
+import axios from "@/configs/axios"
 import {
   CheckoutContainer,
   CompletionContainer,
@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     axios
       .request("/config", {
-        baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
+        method: "GET",
       })
       .then(async (r) => {
         const { publishableKey } = await r.data
