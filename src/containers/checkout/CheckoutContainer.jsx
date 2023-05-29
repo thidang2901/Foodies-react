@@ -67,7 +67,9 @@ const CheckoutContainer = ({ stripePromise }) => {
       .request("/create-payment-intent", {
         method: "POST",
         baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         data: { amount: total },
       })
       .then((res) => res.data)

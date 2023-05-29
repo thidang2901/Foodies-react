@@ -4,7 +4,7 @@ import { defineConfig } from "vite"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/foodies-app",
+  base: "/",
   plugins: [react()],
   server: {
     port: 8080,
