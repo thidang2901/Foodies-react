@@ -104,7 +104,6 @@ const CheckoutContainer = ({ stripePromise }) => {
       <div className="flex w-4/5 flex-col items-center justify-center">
         <Accordion
           title="Order Summary"
-          hashKey="summary"
           onClick={() => setCurrentStep("summary")}
           expanded={expanded.summary}
         >
@@ -141,7 +140,6 @@ const CheckoutContainer = ({ stripePromise }) => {
 
         <Accordion
           title="Delivery Option"
-          hashKey="delivery"
           onClick={() => setCurrentStep("delivery")}
           expanded={expanded.delivery}
         >
@@ -185,7 +183,6 @@ const CheckoutContainer = ({ stripePromise }) => {
 
         <Accordion
           title="Proceed Payment"
-          hashKey="payment"
           onClick={() => setCurrentStep("payment")}
           expanded={expanded.payment}
         >

@@ -5,7 +5,7 @@ export const LOCAL_STORAGE_CONST = {
 }
 
 export const DELIVERY_OPTIONS = [
-  { key: "pickup", name: "Picking-up at store" },
+  { key: "pickup", name: "Picking at store" },
   { key: "shipping", name: "Shipping to address" },
 ]
 

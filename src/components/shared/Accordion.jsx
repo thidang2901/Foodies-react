@@ -1,12 +1,10 @@
 import React from "react"
 import { BsChevronDown, BsChevronUp } from "react-icons/bs"
-import { HashLink } from "react-router-hash-link"
 
 import "./styles.css"
 
 const Accordion = ({
   title,
-  hashKey,
   children,
   onClick,
   expanded = false,
@@ -14,9 +12,7 @@ const Accordion = ({
   closeIcon = <BsChevronUp />,
 }) => {
   return (
-    <HashLink
-      smooth
-      to={`#${hashKey}`}
+    <div
       className="mt-2 w-full cursor-default rounded-md border-2 border-orange-600 bg-white shadow-sm sm:mt-4 md:mt-6"
       onClick={onClick}
     >
@@ -31,7 +27,7 @@ const Accordion = ({
       >
         <div className="pb-4 text-left">{children}</div>
       </div>
-    </HashLink>
+    </div>
   )
 }
 
