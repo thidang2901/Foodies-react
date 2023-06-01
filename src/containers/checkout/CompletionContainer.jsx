@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { actionType, useStateValue } from "@/context"
 
 const CompletionContainer = ({ stripePromise }) => {
-  const [_, dispatch] = useStateValue()
+  const [{ checkoutType }, dispatch] = useStateValue()
 
   useEffect(() => {
     dispatch({
@@ -44,11 +44,23 @@ const CompletionContainer = ({ stripePromise }) => {
   }, [stripePromise])
 
   return (
-    <section className="grid h-90vh place-items-center py-24 px-6 sm:py-32 lg:px-8">
+    <section className="grid h-90vh select-none place-items-center py-24 px-6 sm:py-32 lg:px-8">
       <div className="text-center">
-        <span className="flex justify-center text-5xl font-semibold text-orange-600 sm:text-7xl">
-          Payment successful <span className='ml-5'><FiCheckCircle /></span>
-        </span>
+        {checkoutType !== "shipping" ? (
+          <span className="flex justify-center text-5xl font-semibold text-orange-600 sm:text-7xl">
+            Payment successful{" "}
+            <span className="ml-5">
+              <FiCheckCircle />
+            </span>
+          </span>
+        ) : (
+          <span className="flex justify-center text-5xl font-semibold text-orange-600 sm:text-7xl">
+            Pre-Order successful{" "}
+            <span className="ml-5">
+              <FiCheckCircle />
+            </span>
+          </span>
+        )}
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-textColor dark:text-white sm:text-5xl">
           Thank you for choosing us!
         </h1>

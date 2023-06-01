@@ -1,13 +1,13 @@
 import { Elements } from "@stripe/react-stripe-js"
-import axios from "axios"
-import { useEffect, useState } from "react"
 
+import { useThemeValue } from "@/context"
 import CheckoutForm from "./CheckoutForm"
 
 function CheckoutPayment({ stripePromise, clientSecret, amount }) {
+  const { isDark, _ } = useThemeValue()
 
   const appearance = {
-    theme: "stripe",
+    theme: isDark ? "stripe" : "night",
   }
 
   const options = {
