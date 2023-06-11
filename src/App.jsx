@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion"
 import React, { useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 
-import { Header } from "@/components/shared"
+import { Footer, Header } from "@/components/shared"
 import {
   CheckoutContainer,
   CompletionContainer,
@@ -52,10 +52,7 @@ function App() {
         <main className="mt-14 w-full px-4 py-4 md:mt-20 md:px-16">
           <Routes>
             <Route path="/" element={<HomeContainer />} />
-            <Route
-              path="/checkout"
-              element={<CheckoutContainer stripePromise={stripePromise} />}
-            />
+            <Route path="/checkout" element={<CheckoutContainer stripePromise={stripePromise} />} />
             <Route
               path="/completion"
               element={<CompletionContainer stripePromise={stripePromise} />}
@@ -64,6 +61,7 @@ function App() {
             <Route path="/*" element={<NotFoundContainer />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </AnimatePresence>
   )
