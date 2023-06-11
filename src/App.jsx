@@ -51,9 +51,8 @@ function App() {
 
         <main className="mt-14 w-full px-4 py-4 md:mt-20 md:px-16">
           <Routes>
-            <Route exact path="/" element={<HomeContainer />} />
+            <Route path="/" element={<HomeContainer />} />
             <Route
-              exact
               path="/checkout"
               element={<CheckoutContainer stripePromise={stripePromise} />}
             />
