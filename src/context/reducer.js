@@ -7,6 +7,7 @@ const actionType = {
   SET_CART: "SET_CART",
   REMOVE_CART: "REMOVE_CART",
   SET_ACTIVE_SCREEN: "SET_ACTIVE_SCREEN",
+  SET_CHECKOUT_TYPE: "SET_CHECKOUT_TYPE",
 }
 
 const reducer = (state, action) => {
@@ -29,16 +30,17 @@ const reducer = (state, action) => {
       }
     case actionType.SET_CART: {
       const cartItemsArr = Object.values(action.cartItems)
-      const total = cartItemsArr.reduce((prevTotal, currentItem) => {
+      let total = cartItemsArr.reduce((prevTotal, currentItem) => {
         return prevTotal + currentItem.price * currentItem.cartQty
       }, 0)
+      total = parseFloat(total.toFixed(2))
 
       localStorage.setItem(LOCAL_STORAGE_CONST.CART_ITEMS, JSON.stringify(action.cartItems))
       localStorage.setItem(LOCAL_STORAGE_CONST.CART_TOTAL, total)
       return {
         ...state,
         cartItems: action.cartItems,
-        cartTotal: parseFloat(total.toFixed(2)),
+        cartTotal: total,
       }
     }
     case actionType.REMOVE_CART: {
@@ -54,6 +56,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         activeScreen: action.activeScreen,
+      }
+    }
+    case actionType.SET_CHECKOUT_TYPE: {
+      return {
+        ...state,
+        checkoutType: action.checkoutType,
       }
     }
   }

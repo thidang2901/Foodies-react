@@ -11,9 +11,14 @@ export const DELIVERY_OPTIONS = [
 
 export const PAYMENT_METHODS = [
   { key: "card", name: "Credit/Debit card" },
-  { key: "e_wallet", name: "E-wallet" },
-  { key: "cash", name: "Cash" },
+  { key: "cash", name: "Pay later" },
 ]
+
+export const CHECKOUT_STEPS = {
+  summary: "summary",
+  delivery: "delivery",
+  payment: "payment",
+}
 
 export const OPEN_TIME = "07"
 export const CLOSE_TIME = "22"

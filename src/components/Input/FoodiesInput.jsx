@@ -1,19 +1,17 @@
 import React from "react"
 
-const FoodiesInput = ({ label, value, onChange }) => {
+const FoodiesInput = ({ label, value, onChange, placeholder, required = true }) => {
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col items-start gap-2 border-b border-gray-300 py-2">
       <p>{label}</p>
-      <div className="flex w-full items-center gap-2 border-b border-gray-300 py-2">
-        <input
-          type="text"
-          required
-          value={value}
-          onChange={onChange}
-          placeholder=""
-          className="h-full w-full border-none bg-transparent text-lg text-textColor outline-none placeholder:text-gray-300"
-        />
-      </div>
+      <input
+        type="text"
+        required={required}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="h-full w-full border-none bg-transparent text-lg text-textColor outline-none placeholder:text-gray-300"
+      />
     </div>
   )
 }
