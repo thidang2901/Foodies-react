@@ -1,7 +1,7 @@
-
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import React, { useEffect, useState } from "react"
 
+import { Spinner } from "@/components/shared"
 import "./styles.css"
 
 export default function CheckoutForm() {
@@ -87,9 +87,7 @@ export default function CheckoutForm() {
         disabled={isLoading || !stripe || !elements}
         id="submit"
       >
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
+        <span id="button-text">{isLoading ? <Spinner /> : "Pay now"}</span>
       </button>
 
       {message && <div id="payment-message">{message}</div>}
