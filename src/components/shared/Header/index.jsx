@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
 import React, { useMemo, useState } from "react"
 import { MdAdd, MdHome, MdLogin, MdLogout, MdShoppingBasket } from "react-icons/md"
+import { FormattedMessage } from "react-intl"
 import { Link } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
 
 import { LoginModal } from "@/components/Modal"
-import { ThemeSwitcher } from "@/components/shared"
+import { LanguageSelector, ThemeSwitcher } from "@/components/shared"
 import { actionType, useStateValue } from "@/context"
 
 import Avatar from "@/assets/images/avatar.png"
@@ -85,22 +86,22 @@ const Header = () => {
           >
             <li onClick={closeSubMenu}>
               <HashLink smooth to="/#home">
-                Home
+                <FormattedMessage id="header.home" />
               </HashLink>
             </li>
             <li onClick={closeSubMenu}>
               <HashLink smooth to="/#menu">
-                Menu
+                <FormattedMessage id="header.menu" />
               </HashLink>
             </li>
             <li onClick={closeSubMenu}>
               <HashLink smooth to="/#about">
-                About Us
+                <FormattedMessage id="header.about" />
               </HashLink>
             </li>
             <li onClick={closeSubMenu}>
               <HashLink smooth to="/#contact">
-                Contact Us
+                <FormattedMessage id="header.contact" />
               </HashLink>
             </li>
           </motion.ul>
@@ -115,6 +116,8 @@ const Header = () => {
               )}
             </div>
           )}
+
+          <LanguageSelector />
 
           <div className="relative">
             <motion.img
