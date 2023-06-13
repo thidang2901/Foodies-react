@@ -22,3 +22,6 @@ export const CHECKOUT_STEPS = {
 
 export const OPEN_TIME = "07"
 export const CLOSE_TIME = "22"
+
+export const LOGIN_EMAIL = "wander@foodies.com"
+export const LOGIN_PASSWORD = "Wander#2023"

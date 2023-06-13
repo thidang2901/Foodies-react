@@ -17,6 +17,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
     "@stripe/react-stripe-js": "^2.1.0",
     "@stripe/stripe-js": "^1.52.1",
     "axios": "^1.4.0",
@@ -27,7 +28,8 @@
     "react-hook-form": "^7.44.3",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.0",
-    "react-router-hash-link": "^2.4.3"
+    "react-router-hash-link": "^2.4.3",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

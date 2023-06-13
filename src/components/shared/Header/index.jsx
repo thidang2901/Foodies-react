@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import { MdAdd, MdHome, MdLogin, MdLogout, MdShoppingBasket } from "react-icons/md"
 import { Link } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
@@ -9,6 +9,7 @@ import { ThemeSwitcher } from "@/components/shared"
 import { actionType, useStateValue } from "@/context"
 
 import Avatar from "@/assets/images/avatar.png"
+import UserAvatar from "@/assets/images/user.png"
 import Logo from "@/assets/logo/logo-no-background.svg"
 
 import "./styles.css"
@@ -20,6 +21,11 @@ const Header = () => {
 
   // TODO: add admin privilege feature
   const isAdmin = user && user.email === import.meta.env.VITE_ADMIN_EMAIL
+  const avatarImg = useMemo(() => {
+    if (!user) return UserAvatar
+    if (user?.photoURL) return user.photoURL
+    return Avatar
+  }, [user])
 
   const numCartItems = Object.keys(cartItems).reduce((prevNum, currentId) => {
     if (cartItems[currentId]?.cartQty) {
@@ -28,7 +34,7 @@ const Header = () => {
     return prevNum
   }, 0)
 
-  const logout = () => {
+  const signOut = () => {
     closeSubMenu()
     localStorage.clear()
 
@@ -113,7 +119,7 @@ const Header = () => {
           <div className="relative">
             <motion.img
               whileTap={{ scale: 0.6 }}
-              src={user ? user.photoURL : Avatar}
+              src={avatarImg}
               className="h-10 min-h-[40px] w-10 min-w-[40px] cursor-pointer rounded-full drop-shadow-xl"
               alt="user-profile"
               onClick={toggleSubMenu}
@@ -139,12 +145,12 @@ const Header = () => {
                 )}
 
                 {user ? (
-                  <p className="header__submenu-loginBtn" onClick={logout}>
-                    Logout <MdLogout />
+                  <p className="header__submenu-loginBtn" onClick={signOut}>
+                    Sign out <MdLogout />
                   </p>
                 ) : (
                   <p className="header__submenu-loginBtn" onClick={toggleLoginModal}>
-                    Login <MdLogin />
+                    Sign in <MdLogin />
                   </p>
                 )}
               </motion.div>
@@ -177,7 +183,7 @@ const Header = () => {
         <div className="relative">
           <motion.img
             whileTap={{ scale: 0.6 }}
-            src={user ? user.photoURL : Avatar}
+            src={avatarImg}
             className="h-10 min-h-[40px] w-10 min-w-[40px] cursor-pointer rounded-full drop-shadow-xl"
             alt="user-profile"
             onClick={toggleSubMenu}
@@ -228,12 +234,12 @@ const Header = () => {
               </ul>
 
               {user ? (
-                <p className="header__submenu-loginBtn" onClick={logout}>
-                  Logout <MdLogout />
+                <p className="header__submenu-loginBtn" onClick={signOut}>
+                  Sign out <MdLogout />
                 </p>
               ) : (
                 <p className="header__submenu-loginBtn" onClick={toggleLoginModal}>
-                  Login <MdLogin />
+                  Sign in <MdLogin />
                 </p>
               )}
             </motion.div>
@@ -241,7 +247,14 @@ const Header = () => {
         </div>
       </div>
 
-      {modalShown && <LoginModal trigger={closeSubMenu} close={closeLoginModal} />}
+      {modalShown && (
+        <LoginModal
+          onClose={() => {
+            closeLoginModal()
+            closeSubMenu()
+          }}
+        />
+      )}
     </header>
   )
 }
