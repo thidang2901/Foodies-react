@@ -1,94 +1,69 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { motion } from "framer-motion"
-import React from "react"
-import { BsGoogle } from "react-icons/bs"
-
-import { app } from "@/configs/firebase.config"
-import { actionType, useStateValue } from "@/context"
-import Modal from "./Modal"
+import React, { useState } from "react"
 
 import Logo from "@/assets/logo/logo-no-background.svg"
+import ExternalSignIn from "@/components/Modal/ExternalSignIn"
 
-const LoginModal = ({ trigger, close }) => {
-  const [{ user }, dispatch] = useStateValue()
+import HorizontalLine from "@/components/shared/HorizontalLine"
+import { actionType, useStateValue } from "@/context"
+import Modal from "./Modal"
+import SignInForm from "./SignInForm"
+import SignUpForm from "./SignUpForm"
 
-  const firebaseAuth = getAuth(app)
-  const provider = new GoogleAuthProvider()
+const LoginModal = ({ onClose }) => {
+  const [_, dispatch] = useStateValue()
+  const [isNewMember, setIsNewMember] = useState(false)
+  const [error, setError] = useState(null)
 
-  const googleLogin = async () => {
-    if (!user) {
-      const {
-        user: { refreshToken, providerData },
-      } = await signInWithPopup(firebaseAuth, provider)
-
+  const handleSubmit = ({ user, success, error }) => {
+    if (success) {
       dispatch({
         type: actionType.SET_USER,
-        user: providerData[0],
+        user,
       })
-
-      close()
+      onClose?.()
     } else {
-      trigger()
+      setError(error)
     }
   }
 
-  const normalLogin = () => {
-    console.log("normal login")
-  }
-
   return (
-    <Modal close={close}>
-      <div className="m-4 flex flex-col items-center justify-center gap-4">
+    <Modal close={onClose}>
+      <div className="m-4 flex translate-x-4 transform flex-col items-center justify-center gap-5 transition-all duration-100 ease-in">
         <img src={Logo} alt="login-logo" className="my-5 w-56" />
 
-        <div className="flex w-300 flex-col gap-2">
-          <label className="dark:text-primary">Username</label>
-          <input
-            type="text"
-            className="rounded-md bg-gray-100 px-2 py-1"
-            key="username"
-          />
-        </div>
+        {error && <p className="text-sm text-red-500">{error}</p>}
 
-        <div className="flex w-300 flex-col gap-2">
-          <label className="dark:text-primary">Password</label>
-          <input
-            type="password"
-            className="rounded-md bg-gray-100  px-2 py-1"
-            key="password"
-          />
-        </div>
+        {isNewMember ? (
+          <>
+            <div className="text-sm text-gray-400 dark:text-primary">
+              Already a member?{" "}
+              <span
+                className="cursor-pointer text-orange-700 hover:text-orange-500 dark:text-orange-500 dark:hover:text-orange-400"
+                onClick={() => setIsNewMember(false)}
+              >
+                Sign in!
+              </span>
+            </div>
+            <SignUpForm onSubmit={handleSubmit} />
+          </>
+        ) : (
+          <>
+            <div className="text-sm text-gray-400 dark:text-primary">
+              Not a member yet?{" "}
+              <span
+                className="cursor-pointer text-orange-700 hover:text-orange-500 dark:text-orange-500 dark:hover:text-orange-400"
+                onClick={() => setIsNewMember(true)}
+              >
+                Join us today!
+              </span>
+            </div>
+            <SignInForm onSubmit={handleSubmit} />
+          </>
+        )}
 
-        <div className="flex w-300 items-center justify-between">
-          <a href="#forgot-password" className="text-sm text-gray-400">
-            Forgot password?
-          </a>
+        <HorizontalLine className="w-1/2" centerText="or" />
 
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            type="button"
-            className="my-2 rounded-lg bg-orange-500 px-6 py-2 hover:shadow-lg sm:px-10"
-            onClick={normalLogin}
-          >
-            <span className="text-base text-white">Log in</span>
-          </motion.button>
-        </div>
-
-        <div className="mt-3 flex items-center">
-          <hr className="border-1 w-14 flex-grow" />
-          <div className="px-2 text-gray-400 dark:text-primary">or</div>
-          <hr className="border-1 w-14 flex-grow" />
-        </div>
-
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          type="button"
-          className="my-5 flex w-full items-center justify-center gap-2 rounded-lg bg-gray-100 px-12 py-2 hover:shadow-lg md:w-auto"
-          onClick={googleLogin}
-        >
-          <BsGoogle />
-          <span className="text-base text-textColor">Login with Google</span>
-        </motion.button>
+        <ExternalSignIn onSubmit={handleSubmit} />
       </div>
     </Modal>
   )
