@@ -1,8 +1,6 @@
 import React from "react"
 import { BsChevronDown, BsChevronUp } from "react-icons/bs"
 
-import "./styles.css"
-
 const Accordion = ({
   title,
   children,
